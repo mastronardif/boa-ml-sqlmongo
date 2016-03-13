@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<a0>
+		<name>views</name>
+		<lastmodified>2016-03-13T13:15:30Z</lastmodified>
+		<description>The collection of Views</description>
+	</a0>
+    <a0>
+		<name>buics</name>
+		<lastmodified>2016-03-13T13:15:30Z</lastmodified>
+		<description>The collection of Buics</description>
+	</a0>
+</root>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <glossary>
+      <GlossDiv>
+         <GlossList>
+            <GlossEntry>
+               <GlossSee>markup</GlossSee>
+               <ID>SGML</ID>
+               <SortAs>SGML</SortAs>
+            </GlossEntry>
+         </GlossList>
+         <title>S</title>
+      </GlossDiv>
+      <title>example glossary</title>
+   </glossary>
+</root>

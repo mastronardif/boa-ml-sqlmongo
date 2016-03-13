@@ -1,0 +1,68 @@
+CREATE TABLE TViews (_id int IDENTITY(1000,10),IntCol int, XmlCol xml);
+GO   
+
+INSERT INTO T00(XmlCol)
+SELECT * FROM OPENROWSET(
+   BULK 'C:\FxM\Dev\BOA-ML\SampleData3.txt',
+   SINGLE_BLOB) AS x;
+
+/* */
+
+INSERT INTO TCollections(XmlCol)
+SELECT 
+    Col.query('.')
+FROM 
+ T00
+CROSS APPLY
+    XmlCol.nodes('root/*/.') AS Tbl(Col)
+WHERE
+     _id = 1170
+     
+SELECT 
+    Col.query('.')
+FROM 
+TViews
+CROSS APPLY
+    XmlCol.nodes('root/*/.') AS Tbl(Col)
+WHERE
+     _id = 1170
+
+/* */ 
+
+SELECT 
+  XmlCol.value('(/*/name/node())[1]', 'nvarchar(max)') as Name
+, XmlCol.value('(/*/lastmodified/node())[1]', 'nvarchar(max)') as lastModified
+
+, XmlCol.query('/*/lastmodified') as lastModified
+, XmlCol.query('/*/version') as version
+, XmlCol.query('/*/name') as Name
+, XmlCol.query('/*') as buic
+,*
+FROM TBuics
+where  XmlCol.value('(/*/name/node())[1]', 'nvarchar(max)')  like '%seedDemo001%'
+
+    
+   
+   
+SELECT
+XmlCol.value('(Root/ProductDescription/@ProductModelID)[1]', 'nvarchar(max)') as Summary
+, XmlCol.value('(Root/ProductDescription/Summary/node())[1]', 'nvarchar(max)') as Summary
+--, XmlCol.value('(root/glossary/GlossDiv/GlossList/GlossEntry/Abbrev/node())[1]', 'nvarchar(max)') as Summary
+, XmlCol.query('/root/glossary/GlossDiv/GlossList/GlossEntry/GlossDef/GlossSeeAlso') as tag
+,*
+FROM TViews
+   
+SELECT 
+  XmlCol.value('(Root/ProductDescription/@ProductModelID)[1]', 'nvarchar(max)') as Summary
+, XmlCol.value('(Root/ProductDescription/Summary/node())[1]', 'nvarchar(max)') as Summary
+, XmlCol.value('(root/glossary/GlossDiv/GlossList/GlossEntry/Abbrev/node())[1]', 'nvarchar(max)') as Summary
+, XmlCol.value('(root/glossary/GlossDiv/GlossList/GlossEntry/', 'nvarchar(max)') as tag
+
+,*
+FROM TViews
+
+<root>
+  <glossary>
+    <GlossDiv>
+      <GlossList>
+        <GlossEntry>
